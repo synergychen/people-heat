@@ -21,6 +21,7 @@
         "styles.css"
       ],
       "scripts": [
+        "../node_modules/topojson/dist/topojson.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
