@@ -1,0 +1,14 @@
+<div id="title">TRAFFIC</div>
+
+<div id="traffic-list">
+  <table>
+    <tr>
+      <th class="count">#</th>
+      <th class="name">COUNTRY</th>
+    </tr>
+    <tr *ngFor="let country of countriesList">
+      <td class="count">{{country.count}}</td>
+      <td class="name">{{country.name}}</td>
+    </tr>
+  </table>
+</div>

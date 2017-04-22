@@ -6,11 +6,17 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HeatMapComponent } from './heat-map/heat-map.component';
 import { HeatMapService } from './heat-map/heat-map.service';
+import { StatusPanelComponent } from './status-panel/status-panel.component';
+import { TrafficCardComponent } from './status-panel/traffic-card/traffic-card.component';
+import { LiveCardComponent } from './status-panel/live-card/live-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeatMapComponent
+    HeatMapComponent,
+    StatusPanelComponent,
+    TrafficCardComponent,
+    LiveCardComponent
   ],
   imports: [
     BrowserModule,
