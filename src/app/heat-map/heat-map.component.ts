@@ -34,6 +34,7 @@ export class HeatMapComponent implements OnInit {
     this.heatMapService.getTopology()
       .subscribe(
         topology => {
+          // add country borders
           let features = this.topo
             .feature(topology, topology.objects.countries)
             .features;
@@ -45,7 +46,17 @@ export class HeatMapComponent implements OnInit {
             .attr("class", "geo-border")
             .attr("d", path)
 
-          this.addMarker(35.68, 139.76);
+          // add randon city marker
+          this.heatMapService.getCities()
+            .subscribe(
+              featureCollection => {
+                let randCoord = this.getRandomCoordinates(featureCollection);
+                this.addMarker(randCoord);
+              },
+              error => {
+                console.error(error);
+              }
+            );
         },
         error => {
           console.error(error);
@@ -53,7 +64,15 @@ export class HeatMapComponent implements OnInit {
       )
   }
 
-  private addMarker(lat, lon): void {
+  private getRandomCoordinates(featureCollection: Object): Object {
+    let features = featureCollection["features"];
+    let randomCityFeature = features[Math.floor(Math.random() * features.length)];
+    return randomCityFeature.geometry.coordinates;
+  }
+
+  private addMarker(coordinates): void {
+    let lat = coordinates[1];
+    let lon = coordinates[0];
     let circle = this.svgG.append("circle")
       .attr("class", "marker")
       .attr("cx", this.projection([lon, lat])[0])

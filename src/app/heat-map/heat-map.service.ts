@@ -18,6 +18,13 @@ export class HeatMapService {
       .catch(this.handleError);
   }
 
+  getCities(): Observable<any> {
+    let url = "assets/json/cities.geojson";
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     return res.json();
   }
