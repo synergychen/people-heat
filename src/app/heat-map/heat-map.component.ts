@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
 
-import { HeatMapService } from './heat-map.service';
+import { LocationService } from '../shared/location.service';
 
 @Component({
   selector: 'app-heat-map',
@@ -25,7 +25,7 @@ export class HeatMapComponent implements OnInit {
   private cityFeatureCollection: Object;
 
   constructor(
-    private heatMapService: HeatMapService
+    private locationService: LocationService
   ) { }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class HeatMapComponent implements OnInit {
     let path = d3.geoPath()
       .projection(this.projection);
 
-    this.heatMapService.getTopology()
+    this.locationService.getTopology()
       .subscribe(
         topology => {
           // add country borders
@@ -53,7 +53,7 @@ export class HeatMapComponent implements OnInit {
             .attr("d", path)
 
           // add randon city marker
-          this.heatMapService.getCities()
+          this.locationService.getCities()
             .subscribe(
               featureCollection => {
                 this.cityFeatureCollection = featureCollection;

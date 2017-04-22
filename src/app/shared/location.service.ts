@@ -5,7 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class HeatMapService {
+export class LocationService {
 
   constructor(
     private http: Http

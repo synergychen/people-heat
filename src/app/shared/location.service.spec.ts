@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { HeatMapService } from './heat-map.service';
+import { LocationService } from './location.service';
 
-describe('HeatMapService', () => {
+describe('LocationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HeatMapService]
+      providers: [LocationService]
     });
   });
 
-  it('should ...', inject([HeatMapService], (service: HeatMapService) => {
+  it('should ...', inject([LocationService], (service: LocationService) => {
     expect(service).toBeTruthy();
   }));
 });
