@@ -3,12 +3,12 @@
 <div id="traffic-list">
   <table>
     <tr>
-      <th>#</th>
-      <th>COUNTRY</th>
+      <th class="count">#</th>
+      <th class="name">COUNTRY</th>
     </tr>
     <tr *ngFor="let country of countriesList">
-      <td>{{country.count}}</td>
-      <td>{{country.name}}</td>
+      <td class="count">{{country.count}}</td>
+      <td class="name">{{country.name}}</td>
     </tr>
   </table>
 </div>
