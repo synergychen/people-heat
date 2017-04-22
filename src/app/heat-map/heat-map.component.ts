@@ -11,12 +11,18 @@ import { HeatMapService } from './heat-map.service';
 })
 export class HeatMapComponent implements OnInit {
 
-  width: number = 960;
-  height: number = 960;
-  viewBox: string = "0 180 960 500";
+  readonly width: number = 960;
+  readonly height: number = 960;
+  readonly viewBox: string = "0 180 960 500";
+  readonly markerInterval: number = 1000;
+  readonly markerFadeInDuration: number = 3000;
+  readonly markerFadeOutDuration: number = 20000;
+
   topo: any = topojson;
+
   private svgG: any;
   private projection: any;
+  private cityFeatureCollection: Object;
 
   constructor(
     private heatMapService: HeatMapService
@@ -50,8 +56,8 @@ export class HeatMapComponent implements OnInit {
           this.heatMapService.getCities()
             .subscribe(
               featureCollection => {
-                let randCoord = this.getRandomCoordinates(featureCollection);
-                this.addMarker(randCoord);
+                this.cityFeatureCollection = featureCollection;
+                this.addRandomMarkers();
               },
               error => {
                 console.error(error);
@@ -62,6 +68,15 @@ export class HeatMapComponent implements OnInit {
           console.error(error);
         }
       )
+  }
+
+  private addRandomMarkers() {
+    let randCoord = this.getRandomCoordinates(this.cityFeatureCollection);
+    this.addMarker(randCoord);
+
+    setTimeout(() => {
+      this.addRandomMarkers();
+    }, this.markerInterval);
   }
 
   private getRandomCoordinates(featureCollection: Object): Object {
@@ -82,10 +97,10 @@ export class HeatMapComponent implements OnInit {
 
     circle.style("opacity", 0)
       .transition()
-      .duration(3000)
+      .duration(this.markerFadeInDuration)
       .style("opacity", 1)
       .transition()
-      .duration(10000)
+      .duration(this.markerFadeOutDuration)
       .style("opacity", 0)
       .remove()
   }
