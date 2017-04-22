@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeatMapComponent } from './heat-map/heat-map.component';
+import { HeatMapService } from './heat-map/heat-map.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { HeatMapComponent } from './heat-map/heat-map.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    HeatMapService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
