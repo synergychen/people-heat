@@ -16,7 +16,8 @@ export class HeatMapComponent implements OnInit {
   readonly height: number = 960;
   readonly viewBox: string = "0 180 960 500";
   readonly markerFadeInDuration: number = 8000;
-  readonly markerFadeOutDuration: number = 3000;
+  readonly markerFadeOutDuration: number = 2000;
+  readonly ribbonDelay: number = 1000;
 
   topo: any = topojson;
 
@@ -36,7 +37,7 @@ export class HeatMapComponent implements OnInit {
         changes.city.currentValue.longitude,
         changes.city.currentValue.latitude
       ];
-      this.addMarker(coordinates);
+      this.addRibbonMarker(coordinates);
     }
   }
 
@@ -70,6 +71,16 @@ export class HeatMapComponent implements OnInit {
       )
   }
 
+  private addRibbonMarker(coordinates): void {
+    this.addMarker(coordinates);
+    setTimeout(() => {
+      this.addMarker(coordinates);
+      setTimeout(() => {
+        this.addMarker(coordinates);
+      }, this.ribbonDelay);
+    }, this.ribbonDelay);
+  }
+
   private addMarker(coordinates): void {
     let lat = coordinates[1];
     let lon = coordinates[0];
@@ -79,7 +90,7 @@ export class HeatMapComponent implements OnInit {
       .attr("cy", this.projection([lon, lat])[1])
       .attr("r", 1)
       .style("stroke", "#00E676")
-      .style("stroke-width", 2)
+      .style("stroke-width", 1)
       .style("fill", "none");
 
     circle
@@ -87,11 +98,11 @@ export class HeatMapComponent implements OnInit {
       .transition()
       .duration(this.markerFadeInDuration)
       .style("opacity", 1)
-      .attr("r", 15)
+      .attr("r", 10)
       .transition()
       .duration(this.markerFadeOutDuration)
       .style("opacity", 0)
-      .attr("r", 20)
+      .attr("r", 15)
       .remove()
   }
 

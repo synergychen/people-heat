@@ -6,6 +6,8 @@
   <div id="live-card" class="panel-card">
     <app-live-card [cities]="cities"></app-live-card>
   </div>
-</div>
 
-<div id="panel-bg"></div>
+  <div id="configuration-card" class="panel-card">
+    <app-configuration-card (paused)="onPause($event)"></app-configuration-card>
+  </div>
+</div>

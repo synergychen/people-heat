@@ -16,7 +16,7 @@ export class City {
 
   private getCountryByCity(name: string): string {
     // TODO: get country by city
-    return name[0];
+    return name[0] + "***";
   }
 
 }

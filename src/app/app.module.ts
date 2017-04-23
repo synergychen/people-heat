@@ -9,6 +9,7 @@ import { LocationService } from './shared/location.service';
 import { StatusPanelComponent } from './status-panel/status-panel.component';
 import { TrafficCardComponent } from './status-panel/traffic-card/traffic-card.component';
 import { LiveCardComponent } from './status-panel/live-card/live-card.component';
+import { ConfigurationCardComponent } from './status-panel/configuration-card/configuration-card.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LiveCardComponent } from './status-panel/live-card/live-card.component'
     HeatMapComponent,
     StatusPanelComponent,
     TrafficCardComponent,
-    LiveCardComponent
+    LiveCardComponent,
+    ConfigurationCardComponent
   ],
   imports: [
     BrowserModule,
