@@ -9,17 +9,21 @@ export class ConfigurationCardComponent implements OnInit {
 
   @Output() paused = new EventEmitter<boolean>();
 
+  stop: boolean;
+
   constructor() { }
 
   ngOnInit() {
   }
 
   pause(): void {
-    this.paused.emit(true);
+    this.stop = true;
+    this.paused.emit(this.stop);
   }
 
   resume(): void {
-    this.paused.emit(false);
+    this.stop = false;
+    this.paused.emit(this.stop);
   }
 
 }
