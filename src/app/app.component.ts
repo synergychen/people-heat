@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { LocationService } from './shared/location.service';
 import { City } from './shared/city.model';
-import { CountriesList } from './shared/countries-list.model';
+import { LiveCitiesList } from './shared/live-cities-list.model';
 import { Country } from './shared/country.model';
+import { CountriesList } from './shared/countries-list.model';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,9 @@ export class AppComponent {
   readonly markerInterval: number = 1000;
 
   cities: City[] = [];
-  city: City;
+  mostRecentCity: City;
   countriesList: CountriesList;
+  liveCitiesList: LiveCitiesList;
 
   constructor(
     private locationService: LocationService
@@ -24,6 +26,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.countriesList = new CountriesList();
+    this.liveCitiesList = new LiveCitiesList();
     this.locationService.getCities()
       .subscribe(
         cities => {
@@ -37,8 +40,9 @@ export class AppComponent {
   }
 
   private update() {
-    this.city = this.getRandom(this.cities);
-    this.countriesList.update(this.city);
+    this.mostRecentCity = this.getRandom(this.cities);
+    this.countriesList.update(this.mostRecentCity);
+    this.liveCitiesList.update(this.mostRecentCity);
 
     setTimeout(() => {
       this.update();
