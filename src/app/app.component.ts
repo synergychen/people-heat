@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LocationService } from './shared/location.service';
+import { City } from './shared/city.model';
 
 @Component({
   selector: 'app-root',
@@ -9,20 +10,37 @@ import { LocationService } from './shared/location.service';
 })
 export class AppComponent {
 
+  readonly markerInterval: number = 1000;
+
+  cities: City[] = [];
+  city: City;
+
   constructor(
     private locationService: LocationService
   ) { }
 
   ngOnInit() {
-    // add randon city marker
     this.locationService.getCities()
       .subscribe(
-        featureCollection => {
-          console.log(featureCollection);
+        cities => {
+          this.cities = cities;
+          this.refreshCity();
         },
         error => {
           console.error(error);
         }
       );
+  }
+
+  private refreshCity() {
+    this.city = this.getRandom(this.cities);
+
+    setTimeout(() => {
+      this.refreshCity();
+    }, this.markerInterval);
+  }
+
+  private getRandom(cities: City[]): City {
+    return cities[Math.floor(Math.random() * cities.length)];
   }
 }
