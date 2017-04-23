@@ -13,8 +13,6 @@ import { StatCountriesList } from './shared/stat-countries-list.model';
 })
 export class AppComponent {
 
-  readonly markerInterval: number = 1000;
-
   cities: City[] = [];
   mostRecentCity: City;
   statCountriesList: StatCountriesList;
@@ -50,10 +48,15 @@ export class AppComponent {
 
     setTimeout(() => {
       this.update();
-    }, this.markerInterval);
+    }, this.markerInterval());
   }
 
   private getRandom(cities: City[]): City {
     return cities[Math.floor(Math.random() * cities.length)];
   }
+
+  private markerInterval(): number {
+    return Math.round(Math.random() * 800);
+  }
+
 }
