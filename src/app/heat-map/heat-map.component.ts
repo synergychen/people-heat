@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, OnChanges } from '@angular/core';
 import * as d3 from 'd3';
 
-import { HeatMapService } from './heat-map.service';
+import { LocationService } from '../shared/location.service';
+import { City } from '../shared/city.model';
 
 @Component({
   selector: 'app-heat-map',
@@ -14,7 +15,6 @@ export class HeatMapComponent implements OnInit {
   readonly width: number = 960;
   readonly height: number = 960;
   readonly viewBox: string = "0 180 960 500";
-  readonly markerInterval: number = 1000;
   readonly markerFadeInDuration: number = 3000;
   readonly markerFadeOutDuration: number = 20000;
 
@@ -24,9 +24,21 @@ export class HeatMapComponent implements OnInit {
   private projection: any;
   private cityFeatureCollection: Object;
 
+  @Input() city: City;
+
   constructor(
-    private heatMapService: HeatMapService
+    private locationService: LocationService
   ) { }
+
+  ngOnChanges(changes: any) {
+    if (changes.city && changes.city.currentValue) {
+      let coordinates = [
+        changes.city.currentValue.longitude,
+        changes.city.currentValue.latitude
+      ];
+      this.addMarker(coordinates);
+    }
+  }
 
   ngOnInit() {
     this.projection = d3.geoMercator()
@@ -37,7 +49,7 @@ export class HeatMapComponent implements OnInit {
     let path = d3.geoPath()
       .projection(this.projection);
 
-    this.heatMapService.getTopology()
+    this.locationService.getTopology()
       .subscribe(
         topology => {
           // add country borders
@@ -51,38 +63,11 @@ export class HeatMapComponent implements OnInit {
             .append("path")
             .attr("class", "geo-border")
             .attr("d", path)
-
-          // add randon city marker
-          this.heatMapService.getCities()
-            .subscribe(
-              featureCollection => {
-                this.cityFeatureCollection = featureCollection;
-                this.addRandomMarkers();
-              },
-              error => {
-                console.error(error);
-              }
-            );
         },
         error => {
           console.error(error);
         }
       )
-  }
-
-  private addRandomMarkers() {
-    let randCoord = this.getRandomCoordinates(this.cityFeatureCollection);
-    this.addMarker(randCoord);
-
-    setTimeout(() => {
-      this.addRandomMarkers();
-    }, this.markerInterval);
-  }
-
-  private getRandomCoordinates(featureCollection: Object): Object {
-    let features = featureCollection["features"];
-    let randomCityFeature = features[Math.floor(Math.random() * features.length)];
-    return randomCityFeature.geometry.coordinates;
   }
 
   private addMarker(coordinates): void {

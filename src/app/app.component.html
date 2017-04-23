@@ -1,7 +1,9 @@
 <div id="heat-map-wrapper">
-  <app-heat-map></app-heat-map>
+  <app-heat-map [city]="mostRecentCity"></app-heat-map>
 </div>
 
 <div id="status-panel-wrapper">
-  <app-status-panel></app-status-panel>
+  <app-status-panel
+    [countries]="statCountriesList.top10"
+    [cities]="liveCitiesList.list"></app-status-panel>
 </div>

@@ -4,8 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+import { City } from './city.model';
+
 @Injectable()
-export class HeatMapService {
+export class LocationService {
 
   constructor(
     private http: Http
@@ -21,7 +23,11 @@ export class HeatMapService {
   getCities(): Observable<any> {
     let url = "assets/json/cities.geojson";
     return this.http.get(url)
-      .map(this.extractData)
+      .map(res => {
+        let body = res.json();
+        let cities = body.features.map(e => new City(e));
+        return cities;
+      })
       .catch(this.handleError);
   }
 

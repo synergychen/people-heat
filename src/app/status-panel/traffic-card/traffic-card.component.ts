@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Country } from '../../shared/country.model';
 
 @Component({
   selector: 'app-traffic-card',
@@ -7,20 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrafficCardComponent implements OnInit {
 
-  countriesList: any[] = [];
+  @Input() countries: Country[];
 
   constructor() { }
 
-  ngOnInit() {
-    this.countriesList = [
-      { name: "China", count: 78 },
-      { name: "US", count: 100 },
-      { name: "UK", count: 60 },
-      { name: "South Korea", count: 66 },
-      { name: "Italy", count: 36 },
-      { name: "Taiwan", count: 40 },
-      { name: "Turkey", count: 52 },
-    ];
-  }
+  ngOnInit() { }
 
 }
