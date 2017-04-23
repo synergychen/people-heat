@@ -1,5 +1,12 @@
 $panel-height: 300px
 
+\:host /deep/
+  .title
+    font-size: 16px
+    text-align: center
+    padding: 10px
+    background-color: rgba(0, 0, 0, 0.2)
+
 #panel-container
   width: 100%
   height: $panel-height
@@ -7,12 +14,11 @@ $panel-height: 300px
   bottom: 0
   z-index: 1
   display: flex
-  font-size: 14px
   color: #B9F6CA
   background-color: rgba(33, 33, 33, 0.5)
 
 .panel-card
-  margin-right: 2px
+  margin-left: 5px
 
 #traffic-card
   background-color: rgba(1, 87, 155, 0.1)

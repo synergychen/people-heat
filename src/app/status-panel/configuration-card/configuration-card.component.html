@@ -1,4 +1,4 @@
 <div class="title">SETTINGS</div>
 
-<button *ngIf="!stop" (click)="pause()">PAUSE</button>
-<button *ngIf="stop" (click)="resume()">RESUME</button>
+<a *ngIf="!stop" (click)="pause()" class="btn">PAUSE</a>
+<a *ngIf="stop" (click)="resume()" class="btn">RESUME</a>

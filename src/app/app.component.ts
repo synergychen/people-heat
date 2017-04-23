@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { LocationService } from './shared/location.service';
 import { City } from './shared/city.model';
@@ -9,7 +9,8 @@ import { StatCountriesList } from './shared/stat-countries-list.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.sass'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
 

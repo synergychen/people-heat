@@ -1,4 +1,4 @@
-<div class="title">TRAFFIC</div>
+<div class="title">TOTAL</div>
 
 <div id="traffic-list">
   <table>
@@ -6,7 +6,8 @@
       <th class="count">#</th>
       <th class="name">COUNTRY</th>
     </tr>
-    <tr *ngFor="let country of countries">
+    <tr *ngFor="let country of countries let i = index"
+      [style.opacity]="1 - i * 0.08">
       <td class="count">{{country.count}}</td>
       <td class="name">{{country.name}}</td>
     </tr>

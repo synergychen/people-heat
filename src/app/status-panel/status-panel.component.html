@@ -1,13 +1,13 @@
-<div id="panel-container">
-  <div id="traffic-card" class="panel-card">
+<div id="panel-container" class="card-panel">
+  <div id="traffic-card" class="panel-card card">
     <app-traffic-card [countries]="countries"></app-traffic-card>
   </div>
 
-  <div id="live-card" class="panel-card">
+  <div id="live-card" class="panel-card card">
     <app-live-card [cities]="cities"></app-live-card>
   </div>
 
-  <div id="configuration-card" class="panel-card">
+  <div id="configuration-card" class="panel-card card">
     <app-configuration-card (paused)="onPause($event)"></app-configuration-card>
   </div>
 </div>

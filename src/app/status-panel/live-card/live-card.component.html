@@ -5,12 +5,17 @@
     <tr>
       <th>TIME</th>
       <th>COUNTRY</th>
-      <th>CITY</th>
+      <th class="city">CITY</th>
+      <th class="coordinate">LATITUDE</th>
+      <th class="coordinate">LONGITUDE</th>
     </tr>
-    <tr *ngFor="let city of cities">
+    <tr *ngFor="let city of cities; let i = index"
+      [style.opacity]="1 - i * 0.08">
       <td>{{city.timestamp | date: "HH:mm:ss"}}</td>
       <td>{{city.country}}</td>
-      <td>{{city.name}}</td>
+      <td class="city">{{city.name}}</td>
+      <td class="coordinate">{{city.latitude | number: "1.3-3"}}</td>
+      <td class="coordinate">{{city.longitude | number: "1.3-3"}}</td>
     </tr>
   </table>
 </div>
