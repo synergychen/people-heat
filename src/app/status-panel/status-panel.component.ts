@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Country } from '../shared/country.model';
 
 @Component({
   selector: 'app-status-panel',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./status-panel.component.sass']
 })
 export class StatusPanelComponent implements OnInit {
+
+  @Input() countries: Country[];
 
   constructor() { }
 
