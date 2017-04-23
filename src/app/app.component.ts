@@ -19,6 +19,7 @@ export class AppComponent {
   mostRecentCity: City;
   statCountriesList: StatCountriesList;
   liveCitiesList: LiveCitiesList;
+  pause: boolean;
 
   constructor(
     private locationService: LocationService
@@ -40,10 +41,12 @@ export class AppComponent {
   }
 
   private update() {
-    this.mostRecentCity = this.getRandom(this.cities);
-    this.mostRecentCity.timestamp = new Date();
-    this.statCountriesList.update(this.mostRecentCity);
-    this.liveCitiesList.update(this.mostRecentCity);
+    if (!this.pause) {
+      this.mostRecentCity = this.getRandom(this.cities);
+      this.mostRecentCity.timestamp = new Date();
+      this.statCountriesList.update(this.mostRecentCity);
+      this.liveCitiesList.update(this.mostRecentCity);
+    }
 
     setTimeout(() => {
       this.update();
