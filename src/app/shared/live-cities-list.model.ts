@@ -9,10 +9,10 @@ export class LiveCitiesList {
 
   update(city: City): void {
     if (this.full()) {
-      this.list.shift();
+      this.list.pop();
     }
 
-    this.list.push(city);
+    this.list.unshift(city);
   }
 
   private full(): boolean {

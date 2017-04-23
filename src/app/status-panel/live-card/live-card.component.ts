@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { City } from '../../shared/city.model';
 
 @Component({
   selector: 'app-live-card',
@@ -7,16 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LiveCardComponent implements OnInit {
 
-  list: any[] = [];
+  @Input() cities: City[];
 
   constructor() { }
 
-  ngOnInit() {
-    this.list = [
-      { timestamp: new Date(), country: "US", city: "New York" },
-      { timestamp: new Date(), country: "China", city: "Shanghai" },
-      { timestamp: new Date(), country: "UK", city: "London" },
-    ];
-  }
+  ngOnInit() { }
 
 }

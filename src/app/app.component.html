@@ -3,5 +3,7 @@
 </div>
 
 <div id="status-panel-wrapper">
-  <app-status-panel [countries]="countriesList.top10"></app-status-panel>
+  <app-status-panel
+    [countries]="statCountriesList.top10"
+    [cities]="liveCitiesList.list"></app-status-panel>
 </div>

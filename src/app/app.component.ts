@@ -4,7 +4,7 @@ import { LocationService } from './shared/location.service';
 import { City } from './shared/city.model';
 import { LiveCitiesList } from './shared/live-cities-list.model';
 import { Country } from './shared/country.model';
-import { CountriesList } from './shared/countries-list.model';
+import { StatCountriesList } from './shared/stat-countries-list.model';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent {
 
   cities: City[] = [];
   mostRecentCity: City;
-  countriesList: CountriesList;
+  statCountriesList: StatCountriesList;
   liveCitiesList: LiveCitiesList;
 
   constructor(
@@ -25,7 +25,7 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-    this.countriesList = new CountriesList();
+    this.statCountriesList = new StatCountriesList();
     this.liveCitiesList = new LiveCitiesList();
     this.locationService.getCities()
       .subscribe(
@@ -41,7 +41,8 @@ export class AppComponent {
 
   private update() {
     this.mostRecentCity = this.getRandom(this.cities);
-    this.countriesList.update(this.mostRecentCity);
+    this.mostRecentCity.timestamp = new Date();
+    this.statCountriesList.update(this.mostRecentCity);
     this.liveCitiesList.update(this.mostRecentCity);
 
     setTimeout(() => {

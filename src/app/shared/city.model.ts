@@ -1,5 +1,6 @@
 export class City {
   id: string;
+  timestamp: Date;
   name: string;
   country: string;
   latitude: number;

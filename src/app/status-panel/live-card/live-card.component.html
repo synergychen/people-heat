@@ -7,10 +7,10 @@
       <th>COUNTRY</th>
       <th>CITY</th>
     </tr>
-    <tr *ngFor="let item of list">
-      <td>{{item.timestamp | date: "HH:mm:ss"}}</td>
-      <td>{{item.country}}</td>
-      <td>{{item.city}}</td>
+    <tr *ngFor="let city of cities">
+      <td>{{city.timestamp | date: "HH:mm:ss"}}</td>
+      <td>{{city.country}}</td>
+      <td>{{city.name}}</td>
     </tr>
   </table>
 </div>

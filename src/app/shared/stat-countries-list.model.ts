@@ -1,7 +1,7 @@
 import { City } from './city.model';
 import { Country } from './country.model';
 
-export class CountriesList {
+export class StatCountriesList {
   list: Country[] = [];
   top10: Country[] = [];
 

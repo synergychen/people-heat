@@ -11,8 +11,6 @@ export class TrafficCardComponent implements OnInit {
 
   @Input() countries: Country[];
 
-  countriesList: any[] = [];
-
   constructor() { }
 
   ngOnInit() { }
