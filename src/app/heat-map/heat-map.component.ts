@@ -15,8 +15,8 @@ export class HeatMapComponent implements OnInit {
   readonly width: number = 960;
   readonly height: number = 960;
   readonly viewBox: string = "0 180 960 500";
-  readonly markerFadeInDuration: number = 3000;
-  readonly markerFadeOutDuration: number = 20000;
+  readonly markerFadeInDuration: number = 8000;
+  readonly markerFadeOutDuration: number = 3000;
 
   topo: any = topojson;
 
@@ -77,16 +77,21 @@ export class HeatMapComponent implements OnInit {
       .attr("class", "marker")
       .attr("cx", this.projection([lon, lat])[0])
       .attr("cy", this.projection([lon, lat])[1])
-      .attr("r", 5)
-      .style("fill", "red");
+      .attr("r", 1)
+      .style("stroke", "#00E676")
+      .style("stroke-width", 2)
+      .style("fill", "none");
 
-    circle.style("opacity", 0)
+    circle
+      .style("opacity", 0)
       .transition()
       .duration(this.markerFadeInDuration)
       .style("opacity", 1)
+      .attr("r", 15)
       .transition()
       .duration(this.markerFadeOutDuration)
       .style("opacity", 0)
+      .attr("r", 20)
       .remove()
   }
 
